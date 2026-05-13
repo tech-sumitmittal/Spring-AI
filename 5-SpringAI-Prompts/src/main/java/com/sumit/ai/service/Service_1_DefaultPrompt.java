@@ -1,18 +1,14 @@
-package com.sumit.ai.controller;
+package com.sumit.ai.service;
 
 import org.springframework.ai.chat.client.ChatClient;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.stereotype.Service;
 
-@RestController
-@RequestMapping("/api")
-public class ChatController_DefaultSystemPrompt {
+@Service
+public class Service_1_DefaultPrompt {
 
     private final ChatClient chatClient;
 
-    public ChatController_DefaultSystemPrompt(ChatClient.Builder ccBuilder ){
+    public Service_1_DefaultPrompt(ChatClient.Builder ccBuilder){
         this.chatClient = ccBuilder
                 .defaultSystem("""
                       You are an internal HR assistant. Your role is to help employees with questions related \s
@@ -23,8 +19,7 @@ public class ChatController_DefaultSystemPrompt {
                 .build();
     }
 
-    @GetMapping("/chat_defaultSystemPrompt")
-    public String chat(@RequestParam("message") String message){
+    public String chat(String message){
         return chatClient
                 .prompt()
                 .user(message)
