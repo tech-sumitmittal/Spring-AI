@@ -8,11 +8,11 @@ import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 @RequestMapping("/api")
-public class ChatController_defaultSystemPrompt {
+public class ChatController_DefaultSystemPrompt {
 
     private final ChatClient chatClient;
 
-    public ChatController_defaultSystemPrompt(ChatClient.Builder ccBuilder ){
+    public ChatController_DefaultSystemPrompt(ChatClient.Builder ccBuilder ){
         this.chatClient = ccBuilder
                 .defaultSystem("""
                       You are an internal HR assistant. Your role is to help employees with questions related \s
