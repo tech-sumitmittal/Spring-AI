@@ -10,8 +10,8 @@ public class Service_3_PromptStuffing {
 
     private final ChatClient chatClient;
 
-    public Service_3_PromptStuffing(ChatClient.Builder ccBuilder ){
-        this.chatClient = ccBuilder.build();
+    public Service_3_PromptStuffing(ChatClient.Builder chatClientBuilder ){
+        this.chatClient = chatClientBuilder.build();
     }
 
     @Value("classpath:/promptTemplates/systemPromptTemplate.st")

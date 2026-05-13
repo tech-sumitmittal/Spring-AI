@@ -10,8 +10,8 @@ public class Service_2_PromptTemplates {
 
     private final ChatClient chatClient;
 
-    public Service_2_PromptTemplates(ChatClient.Builder ccBuilder ){
-        this.chatClient = ccBuilder
+    public Service_2_PromptTemplates(ChatClient.Builder chatClientBuilder ){
+        this.chatClient = chatClientBuilder
                             .defaultSystem("""
                                 You are a professional customer service assistant which helps drafting email
                                 responses to improve the productivity of the customer support team

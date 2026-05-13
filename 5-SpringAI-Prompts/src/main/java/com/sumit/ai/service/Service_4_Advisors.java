@@ -11,8 +11,8 @@ public class Service_4_Advisors {
 
     private final ChatClient chatClient;
 
-    public Service_4_Advisors(ChatClient.Builder ccBuilder ){
-        this.chatClient = ccBuilder.build();
+    public Service_4_Advisors(ChatClient.Builder chatClientBuilder ){
+        this.chatClient = chatClientBuilder.build();
     }
 
     @Value("classpath:/promptTemplates/systemPromptTemplate.st")

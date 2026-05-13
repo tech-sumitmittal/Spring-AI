@@ -26,6 +26,9 @@ public class ChatController {
     @Autowired
     Service_5_CustomAdvisors service5CustomAdvisors;
 
+    @Autowired
+    Service_6_ChatOptions service6ChatOptions;
+
     @GetMapping("/chat_defaultPrompt")
     public String defaultPrompts(@RequestParam("message") String message){
         return service1DefaultPrompt.chat(message);
@@ -50,6 +53,11 @@ public class ChatController {
     @GetMapping("/chat_customAdvisors")
     public String customAdvisors(@RequestParam("message") String message){
         return service5CustomAdvisors.chat(message);
+    }
+
+    @GetMapping("/chat_chatOptions")
+    public String chatOptions(@RequestParam("message") String message){
+        return service6ChatOptions.chat(message);
     }
 
 }

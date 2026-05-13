@@ -8,8 +8,8 @@ public class Service_1_DefaultPrompt {
 
     private final ChatClient chatClient;
 
-    public Service_1_DefaultPrompt(ChatClient.Builder ccBuilder){
-        this.chatClient = ccBuilder
+    public Service_1_DefaultPrompt(ChatClient.Builder chatClientBuilder){
+        this.chatClient = chatClientBuilder
                 .defaultSystem("""
                       You are an internal HR assistant. Your role is to help employees with questions related \s
                       to HR policies, such as leave policies, working hours, benefits, and code of conduct. \s
