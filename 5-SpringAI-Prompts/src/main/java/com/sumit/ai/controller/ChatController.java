@@ -6,6 +6,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
+import reactor.core.publisher.Flux;
 
 @RestController
 @RequestMapping("/api")
@@ -28,6 +29,9 @@ public class ChatController {
 
     @Autowired
     Service_6_ChatOptions service6ChatOptions;
+
+    @Autowired
+    Service_7_Stream service7Stream;
 
     @GetMapping("/chat_defaultPrompt")
     public String defaultPrompts(@RequestParam("message") String message){
@@ -59,5 +63,11 @@ public class ChatController {
     public String chatOptions(@RequestParam("message") String message){
         return service6ChatOptions.chat(message);
     }
+
+    @GetMapping("/chat_stream")
+    public Flux<String> stream(@RequestParam("message") String message){
+        return service7Stream.chat(message);
+    }
+
 
 }
