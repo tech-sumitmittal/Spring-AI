@@ -18,8 +18,8 @@ public class Service_6_ChatOptions {
     public Service_6_ChatOptions(ChatClient.Builder chatClientBuilder ){
         ChatOptions chatOptions = ChatOptions.builder()
                                     .model("gpt-3.5-turbo")
-                                    .temperature(0.3)
                                     .maxTokens(200)
+                                    .temperature(0.3)
                                     .presencePenalty(0.6)
                                     .stopSequences(List.of("END"))
                                     .build();
