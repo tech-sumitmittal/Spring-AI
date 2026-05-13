@@ -1,9 +1,6 @@
 package com.sumit.ai.controller;
 
-import com.sumit.ai.service.Service_1_DefaultPrompt;
-import com.sumit.ai.service.Service_2_PromptTemplates;
-import com.sumit.ai.service.Service_3_PromptStuffing;
-import com.sumit.ai.service.Service_4_Advisors;
+import com.sumit.ai.service.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -26,6 +23,9 @@ public class ChatController {
     @Autowired
     Service_4_Advisors service4Advisors;
 
+    @Autowired
+    Service_5_CustomAdvisors service5CustomAdvisors;
+
     @GetMapping("/chat_defaultPrompt")
     public String defaultPrompts(@RequestParam("message") String message){
         return service1DefaultPrompt.chat(message);
@@ -43,8 +43,13 @@ public class ChatController {
     }
 
     @GetMapping("/chat_advisors")
-    public String chat(@RequestParam("message") String message){
+    public String advisors(@RequestParam("message") String message){
         return service4Advisors.chat(message);
+    }
+
+    @GetMapping("/chat_customAdvisors")
+    public String customAdvisors(@RequestParam("message") String message){
+        return service5CustomAdvisors.chat(message);
     }
 
 }
