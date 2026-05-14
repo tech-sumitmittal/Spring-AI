@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.RestController;
 import reactor.core.publisher.Flux;
 
 import java.util.List;
+import java.util.Map;
 
 @RestController
 @RequestMapping("/api")
@@ -24,8 +25,9 @@ public class ChatController {
     private final Service_7_Stream service7Stream;
     private final Service_8_StructuredOutput_POJO service8StructuredOutputPojo;
     private final Service_9_StructuredOutput_List service9StructuredOutputList;
+    private final Service_10_StructuredOutput_Map service10StructuredOutputMap;
 
-    public ChatController(Service_1_DefaultPrompt service1DefaultPrompt, Service_2_PromptTemplates service2PromptTemplates, Service_3_PromptStuffing service3PromptStuffing, Service_4_Advisors service4Advisors, Service_5_CustomAdvisors service5CustomAdvisors, Service_6_ChatOptions service6ChatOptions, Service_7_Stream service7Stream, Service_8_StructuredOutput_POJO service8StructuredOutputPojo, Service_9_StructuredOutput_List service9StructuredOutputList) {
+    public ChatController(Service_1_DefaultPrompt service1DefaultPrompt, Service_2_PromptTemplates service2PromptTemplates, Service_3_PromptStuffing service3PromptStuffing, Service_4_Advisors service4Advisors, Service_5_CustomAdvisors service5CustomAdvisors, Service_6_ChatOptions service6ChatOptions, Service_7_Stream service7Stream, Service_8_StructuredOutput_POJO service8StructuredOutputPojo, Service_9_StructuredOutput_List service9StructuredOutputList, Service_10_StructuredOutput_Map service10StructuredOutputMap) {
         this.service1DefaultPrompt = service1DefaultPrompt;
         this.service2PromptTemplates = service2PromptTemplates;
         this.service3PromptStuffing = service3PromptStuffing;
@@ -35,6 +37,7 @@ public class ChatController {
         this.service7Stream = service7Stream;
         this.service8StructuredOutputPojo = service8StructuredOutputPojo;
         this.service9StructuredOutputList = service9StructuredOutputList;
+        this.service10StructuredOutputMap = service10StructuredOutputMap;
     }
 
     @GetMapping("/chat_defaultPrompt")
@@ -85,5 +88,10 @@ public class ChatController {
         return ResponseEntity.ok(cities);
     }
 
+    @GetMapping("/chat_structuredMap")
+    public ResponseEntity<Map<String, Object>> structuredMap(@RequestParam("message") String message){
+        Map<String, Object> citiesDetails = service10StructuredOutputMap.chat(message);
+        return ResponseEntity.ok(citiesDetails);
+    }
 
 }
