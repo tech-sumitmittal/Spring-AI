@@ -9,6 +9,8 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import reactor.core.publisher.Flux;
 
+import java.util.List;
+
 @RestController
 @RequestMapping("/api")
 public class ChatController {
@@ -21,8 +23,9 @@ public class ChatController {
     private final Service_6_ChatOptions service6ChatOptions;
     private final Service_7_Stream service7Stream;
     private final Service_8_StructuredOutput_POJO service8StructuredOutputPojo;
+    private final Service_9_StructuredOutput_List service9StructuredOutputList;
 
-    public ChatController(Service_1_DefaultPrompt service1DefaultPrompt, Service_2_PromptTemplates service2PromptTemplates, Service_3_PromptStuffing service3PromptStuffing, Service_4_Advisors service4Advisors, Service_5_CustomAdvisors service5CustomAdvisors, Service_6_ChatOptions service6ChatOptions, Service_7_Stream service7Stream, Service_8_StructuredOutput_POJO service8StructuredOutputPojo) {
+    public ChatController(Service_1_DefaultPrompt service1DefaultPrompt, Service_2_PromptTemplates service2PromptTemplates, Service_3_PromptStuffing service3PromptStuffing, Service_4_Advisors service4Advisors, Service_5_CustomAdvisors service5CustomAdvisors, Service_6_ChatOptions service6ChatOptions, Service_7_Stream service7Stream, Service_8_StructuredOutput_POJO service8StructuredOutputPojo, Service_9_StructuredOutput_List service9StructuredOutputList) {
         this.service1DefaultPrompt = service1DefaultPrompt;
         this.service2PromptTemplates = service2PromptTemplates;
         this.service3PromptStuffing = service3PromptStuffing;
@@ -31,6 +34,7 @@ public class ChatController {
         this.service6ChatOptions = service6ChatOptions;
         this.service7Stream = service7Stream;
         this.service8StructuredOutputPojo = service8StructuredOutputPojo;
+        this.service9StructuredOutputList = service9StructuredOutputList;
     }
 
     @GetMapping("/chat_defaultPrompt")
@@ -73,6 +77,12 @@ public class ChatController {
     public ResponseEntity<CountryCitiesModel> structuredPOJO(@RequestParam("message") String message){
         CountryCitiesModel countryCitiesModel = service8StructuredOutputPojo.chat(message);
         return ResponseEntity.ok(countryCitiesModel);
+    }
+
+    @GetMapping("/chat_structuredList")
+    public ResponseEntity<List<String>> structuredList(@RequestParam("message") String message){
+        List<String> cities = service9StructuredOutputList.chat(message);
+        return ResponseEntity.ok(cities);
     }
 
 
