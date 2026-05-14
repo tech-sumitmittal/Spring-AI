@@ -26,8 +26,9 @@ public class ChatController {
     private final Service_8_StructuredOutput_POJO service8StructuredOutputPojo;
     private final Service_9_StructuredOutput_List service9StructuredOutputList;
     private final Service_10_StructuredOutput_Map service10StructuredOutputMap;
+    private final Service_11_StructuredOutput_ListPOJO service11StructuredOutputListPOJO;
 
-    public ChatController(Service_1_DefaultPrompt service1DefaultPrompt, Service_2_PromptTemplates service2PromptTemplates, Service_3_PromptStuffing service3PromptStuffing, Service_4_Advisors service4Advisors, Service_5_CustomAdvisors service5CustomAdvisors, Service_6_ChatOptions service6ChatOptions, Service_7_Stream service7Stream, Service_8_StructuredOutput_POJO service8StructuredOutputPojo, Service_9_StructuredOutput_List service9StructuredOutputList, Service_10_StructuredOutput_Map service10StructuredOutputMap) {
+    public ChatController(Service_1_DefaultPrompt service1DefaultPrompt, Service_2_PromptTemplates service2PromptTemplates, Service_3_PromptStuffing service3PromptStuffing, Service_4_Advisors service4Advisors, Service_5_CustomAdvisors service5CustomAdvisors, Service_6_ChatOptions service6ChatOptions, Service_7_Stream service7Stream, Service_8_StructuredOutput_POJO service8StructuredOutputPojo, Service_9_StructuredOutput_List service9StructuredOutputList, Service_10_StructuredOutput_Map service10StructuredOutputMap, Service_11_StructuredOutput_ListPOJO service11StructuredOutputListPOJO) {
         this.service1DefaultPrompt = service1DefaultPrompt;
         this.service2PromptTemplates = service2PromptTemplates;
         this.service3PromptStuffing = service3PromptStuffing;
@@ -38,6 +39,7 @@ public class ChatController {
         this.service8StructuredOutputPojo = service8StructuredOutputPojo;
         this.service9StructuredOutputList = service9StructuredOutputList;
         this.service10StructuredOutputMap = service10StructuredOutputMap;
+        this.service11StructuredOutputListPOJO = service11StructuredOutputListPOJO;
     }
 
     @GetMapping("/chat_defaultPrompt")
@@ -92,6 +94,12 @@ public class ChatController {
     public ResponseEntity<Map<String, Object>> structuredMap(@RequestParam("message") String message){
         Map<String, Object> citiesDetails = service10StructuredOutputMap.chat(message);
         return ResponseEntity.ok(citiesDetails);
+    }
+
+    @GetMapping("/chat_structuredListPOJO")
+    public ResponseEntity<List<CountryCitiesModel>> structuredListPOJO(@RequestParam("message") String message){
+        List<CountryCitiesModel> countriesCitiesDetails = service11StructuredOutputListPOJO.chat(message);
+        return ResponseEntity.ok(countriesCitiesDetails);
     }
 
 }
