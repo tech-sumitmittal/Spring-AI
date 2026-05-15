@@ -2,6 +2,7 @@ package com.sumit.ai.service;
 
 import org.springframework.ai.chat.client.ChatClient;
 import org.springframework.ai.chat.client.advisor.SimpleLoggerAdvisor;
+import org.springframework.ai.chat.memory.ChatMemory;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.core.ParameterizedTypeReference;
 import org.springframework.stereotype.Service;
@@ -17,8 +18,9 @@ public class S_01_ChatMemoryService {
         this.chatClient = chatClient;
     }
 
-    public String chat(String message){
+    public String chat(String message, String username){
         return chatClient.prompt()
+                         .advisors(advisorSpec -> advisorSpec.param(ChatMemory.CONVERSATION_ID, username))
                          .user(message)
                          .call().content();
     }
