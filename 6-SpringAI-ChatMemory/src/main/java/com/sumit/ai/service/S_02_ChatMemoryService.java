@@ -6,13 +6,13 @@ import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 
 @Service
-public class S_01_ChatMemoryService {
+public class S_02_ChatMemoryService {
 
-    // In-memory
+    // in Database
 
     private final ChatClient chatClient;
 
-    public S_01_ChatMemoryService(@Qualifier("ChatClient_with_in_memory_chat_memory") ChatClient chatClient) {
+    public S_02_ChatMemoryService(@Qualifier("ChatClient_with_jdbc_chat_memory") ChatClient chatClient) {
         this.chatClient = chatClient;
     }
 

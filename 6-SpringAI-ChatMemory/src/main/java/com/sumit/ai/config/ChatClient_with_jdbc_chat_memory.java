@@ -7,6 +7,7 @@ import org.springframework.ai.chat.client.advisor.api.Advisor;
 import org.springframework.ai.chat.memory.ChatMemory;
 import org.springframework.ai.chat.memory.InMemoryChatMemoryRepository;
 import org.springframework.ai.chat.memory.MessageWindowChatMemory;
+import org.springframework.ai.chat.memory.repository.jdbc.JdbcChatMemoryRepository;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -14,11 +15,11 @@ import org.springframework.context.annotation.Configuration;
 import java.util.List;
 
 @Configuration
-public class ChatClient_with_in_memory_chat_memory {
+public class ChatClient_with_jdbc_chat_memory {
 
-    @Bean("ChatClient_with_in_memory_chat_memory")
+    @Bean("ChatClient_with_jdbc_chat_memory")
     public ChatClient chatClient(ChatClient.Builder chatClientBuilder,
-                                 @Qualifier("inMemoryChatMemory") ChatMemory chatMemory) {
+                                 @Qualifier("jdbcChatMemory") ChatMemory chatMemory) {
         Advisor loggerAdvisor = new SimpleLoggerAdvisor();
         Advisor memoryAdvisor = MessageChatMemoryAdvisor.builder(chatMemory).build();
 
@@ -28,17 +29,12 @@ public class ChatClient_with_in_memory_chat_memory {
     }
 
     // to override default behavior of MessageWindowCM
-    @Bean("inMemoryChatMemory")
-    ChatMemory chatMemory(InMemoryChatMemoryRepository inMemoryCMR) {
+    @Bean("jdbcChatMemory")
+    ChatMemory chatMemory(JdbcChatMemoryRepository jdbcCMR) {
         return MessageWindowChatMemory.builder()
                 .maxMessages(3)                     // will remember last 3 messages
-                .chatMemoryRepository(inMemoryCMR)
+                .chatMemoryRepository(jdbcCMR)
                 .build();
-    }
-
-    @Bean
-    public InMemoryChatMemoryRepository inMemoryChatMemoryRepository() {
-        return new InMemoryChatMemoryRepository();
     }
 
 }
