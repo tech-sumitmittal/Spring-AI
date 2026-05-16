@@ -5,6 +5,8 @@ import org.springframework.ai.chat.client.advisor.MessageChatMemoryAdvisor;
 import org.springframework.ai.chat.client.advisor.SimpleLoggerAdvisor;
 import org.springframework.ai.chat.client.advisor.api.Advisor;
 import org.springframework.ai.chat.memory.ChatMemory;
+import org.springframework.ai.chat.memory.InMemoryChatMemoryRepository;
+import org.springframework.ai.chat.memory.MessageWindowChatMemory;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
@@ -21,6 +23,20 @@ public class ChatClient_with_in_memory_chat_memory {
         return chatClientBuilder
                 .defaultAdvisors(List.of(loggerAdvisor, memoryAdvisor))
                 .build();
+    }
+
+    // to override default behavior of MessageWindowCM
+    @Bean
+    ChatMemory chatMemory(InMemoryChatMemoryRepository inMemoryCMR) {
+        return MessageWindowChatMemory.builder()
+                .maxMessages(3)                     // will remember last 3 messages
+                .chatMemoryRepository(inMemoryCMR)
+                .build();
+    }
+
+    @Bean
+    public InMemoryChatMemoryRepository inMemoryChatMemoryRepository() {
+        return new InMemoryChatMemoryRepository();
     }
 
 }
