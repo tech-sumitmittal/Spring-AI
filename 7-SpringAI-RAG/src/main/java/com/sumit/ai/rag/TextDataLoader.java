@@ -3,17 +3,17 @@ package com.sumit.ai.rag;
 import jakarta.annotation.PostConstruct;
 import org.springframework.ai.document.Document;
 import org.springframework.ai.vectorstore.VectorStore;
-import org.springframework.stereotype.Component;
+
 import java.util.List;
 import java.util.stream.Collectors;
 
 // TODO: commenting this annotation so that this document will not load in Vector Store on application startup
 //@Component
-public class RandomDataLoader {
+public class TextDataLoader {
 
     private final VectorStore vectorStore;
 
-    public RandomDataLoader(VectorStore vectorStore) {
+    public TextDataLoader(VectorStore vectorStore) {
         this.vectorStore = vectorStore;
     }
 

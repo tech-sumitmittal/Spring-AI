@@ -14,18 +14,18 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 @Service
-public class S_01_RAGService {
+public class S_01_RAGTextService {
 
     private final ChatClient chatClient;
     private final VectorStore vectorStore;
 
-    public S_01_RAGService(@Qualifier("ChatClient_with_jdbc_chat_memory") ChatClient chatClient, VectorStore vectorStore) {
+    public S_01_RAGTextService(@Qualifier("ChatClient_with_jdbc_chat_memory") ChatClient chatClient, VectorStore vectorStore) {
         this.chatClient = chatClient;
         this.vectorStore = vectorStore;
     }
 
-    @Value("classpath:/promptTemplates/systemPromptRandomDataTemplate.st")
-    Resource systemPromptTemplate;
+    @Value("classpath:/promptTemplates/TextSystemPromptTemplate.st")
+    Resource textSystemPromptTemplate;
 
     public String chat(String message, String username){
 
@@ -45,7 +45,7 @@ public class S_01_RAGService {
         // STEP-3: provide calculated similar context to LLM model to fetch the answer
         return chatClient.prompt()
                          .system(
-                                 promptSystemSpec -> promptSystemSpec.text(systemPromptTemplate)
+                                 promptSystemSpec -> promptSystemSpec.text(textSystemPromptTemplate)
                                          .param("documents", similarContext))
                          .advisors(a -> a.param(ChatMemory.CONVERSATION_ID, username))
                          .user(message)
