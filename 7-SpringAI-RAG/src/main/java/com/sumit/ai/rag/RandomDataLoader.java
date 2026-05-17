@@ -7,7 +7,8 @@ import org.springframework.stereotype.Component;
 import java.util.List;
 import java.util.stream.Collectors;
 
-@Component
+// TODO: commenting this annotation so that this document will not load in Vector Store on application startup
+//@Component
 public class RandomDataLoader {
 
     private final VectorStore vectorStore;

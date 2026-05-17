@@ -20,5 +20,11 @@ public class RAGController {
         return ResponseEntity.ok(s_01_ragService.chat(message, username));
     }
 
+    @GetMapping("/document/chat")
+    public ResponseEntity<String> documentChat(@RequestParam("message") String message,
+                                             @RequestHeader("username") String username) {
+        return ResponseEntity.ok(s_01_ragService.chat(message, username));
+    }
+
 
 }

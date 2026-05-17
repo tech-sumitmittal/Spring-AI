@@ -55,6 +55,11 @@
             <groupId>org.springframework.ai</groupId>
             <artifactId>spring-ai-starter-vector-store-qdrant</artifactId>
         </dependency>
+        <!-- Apache Tike : to read pdf or any type of document in java -->
+        <dependency>
+            <groupId>org.springframework.ai</groupId>
+            <artifactId>spring-ai-tika-document-reader</artifactId>
+        </dependency>
 
         <!-- Spring AI JDBC Chat Memory -->
         <dependency>
