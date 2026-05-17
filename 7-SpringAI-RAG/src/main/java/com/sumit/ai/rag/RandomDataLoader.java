@@ -74,7 +74,11 @@ public class RandomDataLoader {
                 "CRM systems manage customer relationships and sales pipelines.",
                 "SWOT analysis identifies strengths, weaknesses, opportunities, and threats."
         );
+
+        // prepare List<Document> from List<String>
         List<Document> documents = sentences.stream().map(Document::new).collect(Collectors.toList());
+
+        // add List<Document> to Vector Store
         vectorStore.add(documents);
     }
 
